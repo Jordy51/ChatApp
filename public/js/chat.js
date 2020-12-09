@@ -16,6 +16,9 @@ const $locationURL = document.querySelector("#locationURL");
 const messageTemplate = document.querySelector("#message-template").innerHTML;
 const locationTemplate = document.querySelector("#location-template").innerHTML;
 
+// Options
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
+
 socket.on("message", (message) => {
 	console.log(message.text);
 	const html = Mustache.render(messageTemplate, {
@@ -49,7 +52,6 @@ $messageForm.addEventListener("submit", (e) => {
 		if (error) {
 			return console.log(error);
 		}
-		console.log("Message delivered!");
 	});
 });
 
@@ -66,7 +68,8 @@ $sendLocationButton.addEventListener("click", () => {
 				return console.log(error);
 			}
 			$sendLocationButton.removeAttribute("disabled");
-			console.log("Location shared!");
 		});
 	});
 });
+
+socket.emit("join", { username, room });
