@@ -17,12 +17,19 @@ const messageTemplate = document.querySelector("#message-template").innerHTML;
 const locationTemplate = document.querySelector("#location-template").innerHTML;
 
 socket.on("message", (message) => {
-	const html = Mustache.render(messageTemplate, { message });
+	console.log(message.text);
+	const html = Mustache.render(messageTemplate, {
+		message: message.text,
+		createdAt: moment(message.createdAt).format("h:mm A"),
+	});
 	$messages.insertAdjacentHTML("beforeend", html);
 });
 
-socket.on("locationMessage", (locationURL) => {
-	const html = Mustache.render(locationTemplate, { locationURL });
+socket.on("locationMessage", (locationMessage) => {
+	const html = Mustache.render(locationTemplate, {
+		locationURL: locationMessage.locationURL,
+		createdAt: moment(locationMessage.createdAt).format("h:mm A"),
+	});
 	$locationURL.insertAdjacentHTML("beforeend", html);
 });
 
