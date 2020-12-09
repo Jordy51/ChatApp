@@ -30,7 +30,7 @@ socket.on("locationMessage", (locationMessage) => {
 		locationURL: locationMessage.locationURL,
 		createdAt: moment(locationMessage.createdAt).format("h:mm A"),
 	});
-	$locationURL.insertAdjacentHTML("beforeend", html);
+	$messages.insertAdjacentHTML("beforeend", html);
 });
 
 $messageForm.addEventListener("submit", (e) => {
