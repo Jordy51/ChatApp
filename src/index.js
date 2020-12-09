@@ -32,7 +32,8 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("sendLocation", (coords, callback) => {
-		io.emit("message", `https://google.com/maps?q=${coords.longitude},${coords.latitude}`);
+		io.emit("locationMessage", `https://google.com/maps?q=${coords.longitude},${coords.latitude}`);
+
 		if (coords === {}) {
 			return callback("Location not shared!");
 		}
