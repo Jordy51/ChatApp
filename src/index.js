@@ -5,12 +5,15 @@ const socketio = require("socket.io");
 const Filter = require("bad-words");
 const { genereateMessage, genereateLocationMessage } = require("./utils/messages");
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./utils/users");
+const { Console } = require("console");
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-const PORT = 3000;
+console.log(process.env.PORT)
+const PORT = process.env.PORT || 3000;
+
 const publicDirectoryPath = path.join(__dirname, "../public");
 
 app.use(express.json());
